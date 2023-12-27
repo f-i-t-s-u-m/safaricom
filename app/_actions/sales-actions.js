@@ -40,6 +40,7 @@ export async function shopSale(id, filterBy = {}, stat = false,) {
                 tags:['sales']
             }
         })
+        return res.json()
         
     } catch {
         console.log("error");
@@ -47,7 +48,6 @@ export async function shopSale(id, filterBy = {}, stat = false,) {
     }
    
 
-    return res.json()
 
 }
 

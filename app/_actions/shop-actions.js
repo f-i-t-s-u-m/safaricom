@@ -1,7 +1,7 @@
 'use server'
 
 import supabase from "@/lib/supabase"
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 
 export async function listShop() {
@@ -87,8 +87,11 @@ export async function createShop(formData) {
     if(newShop.status == 201) {
 
         revalidateTag('shops')
+        revalidatePath('/shops')
         return {status:"ok", data:newShop}
     }
+
+    console.log("action  ", newShop);
 
     return {status:"error", data:"somthing went wrong"}
 

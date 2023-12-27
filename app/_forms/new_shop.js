@@ -11,26 +11,21 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { allProducts, createProduct } from "../_actions/product-actions"
-import { createSales } from "../_actions/sales-actions"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useEffect, useState } from "react"
-import { allUsers } from "../_actions/user-action"
-import { Calendar } from "@/components/ui/calendar"
-import CalendarDateRangePicker from "@/components/calendar-date-range-picker"
+
 import { SubmitButton } from "@/components/submit-button"
-import {useFormState} from 'react-dom'
 import { createShop } from "../_actions/shop-actions"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 
 export  function NewShop() {
 
   const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
 
-
+const router = useRouter()
   const handleForm = async (e) => {
     const res = await createShop(e)
+
   
       if(res?.status == "ok") {
         router.push(`shop/${res.data.data[0].id}`)
