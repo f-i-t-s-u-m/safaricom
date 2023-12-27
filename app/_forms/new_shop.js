@@ -21,21 +21,36 @@ import { Calendar } from "@/components/ui/calendar"
 import CalendarDateRangePicker from "@/components/calendar-date-range-picker"
 import { SubmitButton } from "@/components/submit-button"
 import {useFormState} from 'react-dom'
+import { createShop } from "../_actions/shop-actions"
 
 
 export  function NewShop() {
 
-  // const [userData, setUserData] = useState()
+  const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
 
 
+  const handleForm = async (e) => {
+    const res = await createShop(e)
   
+      if(res?.status == "ok") {
+        router.push(`shop/${res.data.data[0].id}`)
+        setShowNewTeamDialog(false)
+  
+      }
+  
+      else {
+        setError(res.data)
+      }
+
+      return true
+    }
 
   return (
-    <Dialog >
+    <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
        
           
                   <DialogTrigger asChild>
-                  <Button >Add new shop</Button>
+                  <Button  onClick={() => setShowNewTeamDialog(true)}>Add new shop</Button>
                   </DialogTrigger>
           
           
@@ -47,7 +62,7 @@ export  function NewShop() {
   
             </DialogDescription>
           </DialogHeader>
-          <form >
+          <form action={handleForm}>
             <div className="space-y-4 py-2 pb-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Shop name</Label>

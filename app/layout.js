@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <div className="border-b fixed w-full backdrop-blur-md z-10">
+      <div className="border-b fixed w-full backdrop-blur-md bg-white bg-opacity-70 z-10">
           <div className="flex h-16 items-center px-4">
             {/* <ShopSwitcher /> */}
             <MainNav className="mx-6" />
