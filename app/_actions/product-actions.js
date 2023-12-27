@@ -5,11 +5,19 @@ import { revalidateTag } from "next/cache"
 
 
 export async function allProducts() {
-    const res = await fetch(`${process.env.BASE_URL}/api/product`, {
-        next:{
-            tags:['products']
-        }
-    })
+
+
+    try {
+        const res = await fetch(`${process.env.BASE_URL}/api/product`, {
+            next:{
+                tags:['products']
+            }
+        })
+        
+    } catch {
+        console.log("error");
+        return []
+    }
 
     return res.json()
 

@@ -6,19 +6,24 @@ import { revalidateTag } from "next/cache"
 
 
 export async function allSales(group=false) {
-    const res = await fetch(`${process.env.BASE_URL}/api/sales`, {
-        next:{
-            tags:['sales']
-        }
-    })
 
-        if(group) {
-            const resJson = await res.json()
-            return ByProductType(resJson)
-        }
+    try {
+
+        
+        const res = await fetch(`${process.env.BASE_URL}/api/sales`, {
+            next:{
+                tags:['sales']
+            }
+        })
+        
+        return res.json()
+    } catch {
+        console.log("error");
+        return []
+    }
+      
   
 
-    return res.json()
 
 }
 
@@ -27,20 +32,20 @@ export async function shopSale(id, filterBy = {}, stat = false,) {
 
     const filterQuery = `?from=${filterBy?.from}&to=${filterBy?.to}`
     const url = `${process.env.BASE_URL}/api/shop/${id}/sales${!!filterBy?.from ? filterQuery : ''}`
-    const res = await fetch(url, {
-        next:{
-            tags:['sales']
-        }
-    })
 
+    try {
 
-   
-
-    if (stat) {
-            const resJson = await res.json()
-            return  thisMonthSales(resJson)
+        const res = await fetch(url, {
+            next:{
+                tags:['sales']
+            }
+        })
         
+    } catch {
+        console.log("error");
+        return []
     }
+   
 
     return res.json()
 
@@ -104,60 +109,24 @@ export async function createSales(getInfo, someData, formData) {
 export async function getTotalSales(filterBy) {
     
     const filterQuery = `?from=${filterBy?.from}&to=${filterBy?.to}`
-    const res = await fetch(`${process.env.BASE_URL}/api/sales/total${!!filterBy?.from ? filterQuery : ''}`, {
-        next:{
-            tags:['sales']
-        }
-    })
 
-    return res.json()
+    try {
+
+        const res = await fetch(`${process.env.BASE_URL}/api/sales/total${!!filterBy?.from ? filterQuery : ''}`, {
+            next:{
+                tags:['sales']
+            }
+        })
+        return res.json()
+
+    } catch {
+        console.log("error");
+        return []
+    }
+
 }
 
 
 // export  function generateReport ()
 
 
-
-function ByProductType(apiResponse) {
-    const nestedObject = {};
-  
-    apiResponse.forEach((item) => {
-      const productType = item.product_type;
-  
-      if (!nestedObject[productType]) {
-        nestedObject[productType] = [];
-      }
-  
-      nestedObject[productType].push(item);
-    });
-    // console.log("new type", nestedObject);
-    return nestedObject;
-  }
-  
-
-function generateSalesObject(formData) {
-
-    
-    const sales = [];
-    let currentSales = {};
-
-formData.forEach((value, key) => {
-  if(key.includes('[type]')) {
-    currentSales.product_id = value; 
-
-} else if (key.includes('[user_id]')) { 
-    currentSales.user_id = value;
-
-} else if (key.includes('[quantity]')) { 
-    currentSales.quantity = parseInt(value);
-    currentSales.shop_id = getInfo.shop_id;
-    
-    // save user object
-    sales.push(currentSales);  
-    currentSales = {}; 
-}
-});
-
-return sales
-
-}

@@ -5,25 +5,38 @@ import { revalidateTag } from "next/cache"
 
 
 export async function getUser(id) {
-    const res = await fetch(`${process.env.BASE_URL}/api/user/${id}`, {
-        next:{
-            tags:[`user-${id}`]
-        }
-    })
+    try {
+
+        const res = await fetch(`${process.env.BASE_URL}/api/user/${id}`, {
+            next:{
+                tags:[`user-${id}`]
+            }
+        })
+    } catch {
+        console.log("error");
+        return []
+    }
 
     return res.json()
 
 }
 
 export async function allUsers() {
-    const res = await fetch(`${process.env.BASE_URL}/api/user`, {
-        next:{
-            tags:['users']
-        }
-    })
 
-    return res.json()
+    try {
 
+        const res = await fetch(`${process.env.BASE_URL}/api/user`, {
+            next:{
+                tags:['users']
+            }
+        })
+        
+        return res.json()
+        
+    } catch {
+        console.log("error");
+        return []
+    }
 }
 
 

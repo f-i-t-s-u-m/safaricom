@@ -29,13 +29,20 @@ export async function getShop(id) {
 
 
 export async function listShopUsers(id) {
-    const res = await fetch(`${process.env.BASE_URL}/api/shop/${id}/users`, {
-        next:{
-            tags:[`shop-${id}-users`]
-        }
-    })
 
-    return res.json()
+    try {
+
+        const res = await fetch(`${process.env.BASE_URL}/api/shop/${id}/users`, {
+            next:{
+                tags:[`shop-${id}-users`]
+            }
+        })
+        
+        return res.json()
+    } catch {
+        console.log("error");
+        return []
+    }
 
 }
 
