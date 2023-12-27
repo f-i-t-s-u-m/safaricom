@@ -29,9 +29,7 @@ export default async function DashboardCards({totalSales}) {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{totalSales[0]?.total?.toLocaleString() ?? 0}</div>
-                    <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p>
+                    
                   </CardContent>
                 </Card>
                 <Card>
@@ -56,9 +54,7 @@ export default async function DashboardCards({totalSales}) {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{totalSales[0]?.air_time?.toLocaleString() ?? 0}</div>
-                    <p className="text-xs text-muted-foreground">
-                      +180.1% from last month
-                    </p>
+                   
                   </CardContent>
                 </Card>
                 <Card>
@@ -80,9 +76,7 @@ export default async function DashboardCards({totalSales}) {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{totalSales[0]?.sim_card?.toLocaleString() ?? 0}</div>
-                    <p className="text-xs text-muted-foreground">
-                      +19% from last month
-                    </p>
+                  
                   </CardContent>
                 </Card>
                 <Card>
@@ -105,9 +99,7 @@ export default async function DashboardCards({totalSales}) {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{totalSales[0]?.device?.toLocaleString() ?? 0}</div>
-                    <p className="text-xs text-muted-foreground">
-                      +201 since last hour
-                    </p>
+                   
                   </CardContent>
                 </Card>
               </div>
