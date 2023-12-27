@@ -69,7 +69,6 @@ export  function NewSales({user}) {
         <form action={formAction}>
         
         <Table>
-  <TableCaption>A list of your recent invoices.</TableCaption>
   <TableHeader>
     <TableRow>
       <TableHead className="max-w-[200px] w-44">Product</TableHead>

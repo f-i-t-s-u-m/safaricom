@@ -21,10 +21,15 @@ export default async function page() {
 
   return (
   <>
+   <div className="flex justify-between">
+
       <div className='mb-10'>
      <h2 className="text-3xl mb-0 pb-1 font-bold tracking-tight">Products</h2>
      <p className="text-gray-600">All of your products</p>
     </div>
+
+    <NewProduct />
+   </div>
     <Table>
     <TableCaption>A list of products.</TableCaption>
     <TableHeader>
@@ -37,7 +42,7 @@ export default async function page() {
       </TableRow>
     </TableHeader>
     <TableBody>
-      {products.map((item) => (
+      {products?.map((item) => (
         <TableRow key={item.id}>
           <TableCell className="font-medium">{item.name}</TableCell>
           <TableCell>{item.icon}</TableCell>

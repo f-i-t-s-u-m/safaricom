@@ -9,7 +9,7 @@ import {
     const users = await listShopUsers(id)
     return (
       <div className="space-y-8">
-        {users.map(e => (
+        {users?.map(e => (
 
           <div key={e.id} className="flex items-center">
           <Avatar className="h-9 w-9">

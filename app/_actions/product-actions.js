@@ -14,12 +14,12 @@ export async function allProducts() {
             }
         })
         
+        return res.json()
     } catch {
         console.log("error");
         return []
     }
 
-    return res.json()
 
 }
 

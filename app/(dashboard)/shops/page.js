@@ -40,7 +40,7 @@ export default async function DashboardPage() {
     </div>
     <div className="grid grid-cols-4 gap-6">
 
-          {shops.map(e => (
+          {shops?.map(e => (
             
             <CardWithImg key={e.id} {...e} />
           ))}

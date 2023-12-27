@@ -18,13 +18,13 @@ export function NewProduct() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">New User</Button>
+        <Button>Add new product</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Add new product</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when youre done.
+            create new products
           </DialogDescription>
         </DialogHeader>
         <form action={createProduct}>

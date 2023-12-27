@@ -53,7 +53,7 @@ export  function NewSales({shop_id}) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[80%] lg:max-w-[50%]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Add sales</DialogTitle>
           <DialogDescription>
             Make changes to your profile here. Click save when youre done.
           </DialogDescription>
