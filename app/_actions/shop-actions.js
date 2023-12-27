@@ -5,6 +5,7 @@ import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 
 export async function listShop() {
+    try {
     const res = await fetch(`${process.env.BASE_URL}/api/shop`, {
         next:{
             tags:['shops']
@@ -13,10 +14,17 @@ export async function listShop() {
 
     return res.json()
 
+} catch {
+    console.log("error");
+    return []
+}
+
 }
 
 
 export async function getShop(id) {
+
+    try {
     const res = await fetch(`${process.env.BASE_URL}/api/shop/${id}`, {
         next:{
             tags:[`shop-${id}`]
@@ -24,6 +32,11 @@ export async function getShop(id) {
     })
 
     return res.json()
+
+} catch {
+    console.log("error");
+    return []
+}
 
 }
 
