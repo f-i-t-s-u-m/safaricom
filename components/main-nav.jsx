@@ -15,26 +15,21 @@ export default function MainNav({
         href="/"
         className="text-sm font-medium transition-colors hover:text-primary"
       >
-        Overview
+        Home
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/plans"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Customers
+        Plans
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/goals"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Products
+        Goals
       </Link>
-      <Link
-        href="/examples/dashboard"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Settings
-      </Link>
+      
     </nav>
   )
 }

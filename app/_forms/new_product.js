@@ -11,16 +11,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { createUser } from "../_actions/user-action"
+import { createProduct } from "../_actions/product-actions"
 
 
-export function NewUser({shop_id}) {
-    console.log("shop_id", shop_id);
-    const  handleFormWithShopId = createUser.bind(null, shop_id)
+export function NewProduct() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button >Add User</Button>
+        <Button variant="outline">New User</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -29,7 +27,7 @@ export function NewUser({shop_id}) {
             Make changes to your profile here. Click save when youre done.
           </DialogDescription>
         </DialogHeader>
-        <form action={handleFormWithShopId}>
+        <form action={createProduct}>
 
         <div className="grid gap-4 py-4">
           <div className="space-y-3">
@@ -39,42 +37,39 @@ export function NewUser({shop_id}) {
             <Input id="name" name="name" className="col-span-3" />
           </div>
           <div className="space-y-3">
-            <Label htmlFor="username" className="text-right">
-              Phone
+            <Label htmlFor="price" className="text-right">
+              Price
             </Label>
-            <Input id="username" name="phone" className="col-span-3" />
+            <Input id="price" name="price" className="col-span-3" />
           </div>
 
-          <div className="space-y-3">
-            <Label htmlFor="username" className="text-right">
-              User Id
-            </Label>
-            <Input id="username" name="user_id"  className="col-span-3" />
-          </div>
+          
 
-          <div className="space-y-3">
-            <Label htmlFor="username" className="text-right" >
-              Start Date
-            </Label>
-            <Input id="username" name="start_date" placeholder="Year-Month-Day"  className="col-span-3" />
-          </div>
+          
 
           <div className="space-y-3">
             <Label htmlFor="username" className="text-right">
               Type
             </Label>
-            <Select name="user_type" >
+            <Select name="product_type" >
                
                   <SelectTrigger>
                     <SelectValue placeholder="Select a user type" />
                   </SelectTrigger>
                 
                 <SelectContent>
-                  <SelectItem value="dsa">DSA</SelectItem>
-                  <SelectItem value="ba">BA</SelectItem>
-                  <SelectItem value="dsp">DSP</SelectItem>
+                  <SelectItem value="air_time">Air Time</SelectItem>
+                  <SelectItem value="sim_card">Sim Card</SelectItem>
+                  <SelectItem value="device">Device</SelectItem>
                 </SelectContent>
               </Select>
+          </div>
+
+          <div className="space-y-3">
+            <Label htmlFor="icon_url" className="text-right">
+              Icon User
+            </Label>
+            <Input id="icon_url" name="icon_url" className="col-span-3" />
           </div>
         </div>
         <DialogFooter>

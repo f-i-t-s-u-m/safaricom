@@ -41,23 +41,35 @@ export async function listShopUsers(id) {
 
 
 export async function createShop(formData) {
-    const rawFormData = {
-        id:formData.get('id') ?? undefined,
-        name:formData.get('name'),
-        location:formData.get('location')
+     const id  = formData.get('id') ?? undefined
+    const name = formData.get('name')
+    const location = formData.get('location')
+
+    if (name == '' || location == '') {
+        return {status:"error", data:"one or more fields missing"}
     }
 
-    const newShop = await supabase.from('shop').upsert(rawFormData)
+    const rawFormData = {
+        id,
+        name,
+        location
+    }
 
-    console.log(formData, rawFormData, newShop);
+
+
+    const newShop = await supabase.from('shop').upsert(rawFormData).select()
+
+    // console.log(newShop);
+    
+    // console.log(formData, rawFormData, newShop);
 
 
     if(newShop.status == 201) {
 
-        revalidateTag('shops')        
+        revalidateTag('shops')
         return {status:"ok", data:newShop}
     }
 
-    return {status:"error"}
+    return {status:"error", data:"somthing went wrong"}
 
 }
