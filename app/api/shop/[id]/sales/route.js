@@ -18,14 +18,11 @@ export async function GET(request, {params}) {
           .gt("date", from)
           .lt("date", to )
           
-          //   .gte('date', startDate)
-        //   .group('date')
-          //   .lte('date', endDate)
-      
+
 
         if (error) {
           console.log(error)
-          return
+          return  NextResponse.json([])
         }
         
         if (!data.length) {

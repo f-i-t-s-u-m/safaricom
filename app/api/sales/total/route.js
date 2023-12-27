@@ -22,7 +22,7 @@ export async function GET(request) {
      
       if (error) {
         console.log(error)
-        return NextResponse.json({status:"error", data:"error"})
+        return NextResponse.json([])
       }
       
       if (!sales.length) {
