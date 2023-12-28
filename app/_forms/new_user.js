@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -12,24 +13,41 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { createUser } from "../_actions/user-action"
+import { SubmitButton } from "@/components/submit-button"
+import { useEffect, useState } from "react"
+import {useFormState} from "react-dom"
+
+export function NewUser({shop_id, user, variant = false, label="Add new user", title="Create new profile", description = "Add new user to your shop"}) {
+    // console.log("shop_id", shop_id);
+    const  handleFormWithShopId = createUser.bind(null, {shop_id})
+    const [showDialog, setShowDialog] = useState()
+  const [state, formAction] = useFormState(handleFormWithShopId, {...user})
 
 
-export function NewUser({shop_id}) {
-    console.log("shop_id", shop_id);
-    const  handleFormWithShopId = createUser.bind(null, shop_id)
+  useEffect(() => {
+    if(state?.status == 201) {
+      setShowDialog(false)
+    }
+
+    else {
+      console.log("error here new shop form");
+    }
+  
+  }, [state, user])
+
   return (
-    <Dialog>
+    <Dialog open={showDialog} onOpenChange={setShowDialog}>
       <DialogTrigger asChild>
-        <Button >Add User</Button>
+        <Button >{label}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle> {title} </DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when youre done.
+            {description}
           </DialogDescription>
         </DialogHeader>
-        <form action={handleFormWithShopId}>
+        <form action={formAction}>
 
         <div className="grid gap-4 py-4">
           <div className="space-y-3">
@@ -39,31 +57,31 @@ export function NewUser({shop_id}) {
             <Input id="name" name="name" className="col-span-3" />
           </div>
           <div className="space-y-3">
-            <Label htmlFor="username" className="text-right">
+            <Label htmlFor="phone" className="text-right">
               Phone
             </Label>
-            <Input id="username" name="phone" className="col-span-3" />
+            <Input id="phone" type="number" name="phone" className="col-span-3" />
           </div>
 
           <div className="space-y-3">
-            <Label htmlFor="username" className="text-right">
+            <Label htmlFor="userId" className="text-right">
               User Id
             </Label>
-            <Input id="username" name="user_id"  className="col-span-3" />
+            <Input id="userId" type="number" name="user_id"  className="col-span-3" />
           </div>
 
           <div className="space-y-3">
-            <Label htmlFor="username" className="text-right" >
+            <Label htmlFor="startDate" className="text-right" >
               Start Date
             </Label>
-            <Input id="username" name="start_date" placeholder="Year-Month-Day"  className="col-span-3" />
+            <Input id="startDate" type="date" name="start_date" placeholder="Year-Month-Day"  className="col-span-3" />
           </div>
 
           <div className="space-y-3">
-            <Label htmlFor="username" className="text-right">
+            <Label htmlFor="userType" className="text-right">
               Type
             </Label>
-            <Select name="user_type" >
+            <Select id="userType" name="user_type" >
                
                   <SelectTrigger>
                     <SelectValue placeholder="Select a user type" />
@@ -78,7 +96,7 @@ export function NewUser({shop_id}) {
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <SubmitButton label={!!user ? 'Update' : 'Create user'} />
         </DialogFooter>
         </form>
       </DialogContent>

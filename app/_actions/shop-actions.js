@@ -60,8 +60,11 @@ export async function listShopUsers(id) {
 }
 
 
-export async function createShop(formData) {
-     const id  = formData.get('id') ?? undefined
+export async function createShop(currentState, someData, formData) {
+
+  
+
+     const id  = currentState.id ?? undefined
     const name = formData.get('name')
     const location = formData.get('location')
 
@@ -88,7 +91,7 @@ export async function createShop(formData) {
 
         revalidateTag('shops')
         revalidatePath('/shops')
-        return {status:"ok", data:newShop}
+        return newShop
     }
 
     console.log("action  ", newShop);

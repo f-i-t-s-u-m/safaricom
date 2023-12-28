@@ -1,7 +1,7 @@
 'use server'
 
 import supabase from "@/lib/supabase"
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 
 export async function getUser(id) {
@@ -12,12 +12,12 @@ export async function getUser(id) {
                 tags:[`user-${id}`]
             }
         })
+
+        return res.json()
     } catch {
         console.log("error");
         return []
     }
-
-    return res.json()
 
 }
 
@@ -41,7 +41,37 @@ export async function allUsers() {
 
 
 
-export async function createUser(shop_id, formData) {
+export async function userSales(id, filterBy = {}, stat = false,) {
+
+    const filterQuery = `?from=${filterBy?.from}&to=${filterBy?.to}`
+    const url = `${process.env.BASE_URL}/api/user/${id}/sales${!!filterBy?.from ? filterQuery : ''}`
+
+    try {
+
+        const res = await fetch(url, {
+            next:{
+                tags:['sales']
+            }
+        })
+        return res.json()
+        
+    } catch {
+        console.log("error");
+        return []
+    }
+   
+
+
+}
+
+
+
+
+export async function createUser(currentState, bindData, formData) {
+
+
+    
+
     const rawFormData = {
         id:formData?.get('id') ?? undefined,
         name:formData.get('name'),
@@ -49,21 +79,22 @@ export async function createUser(shop_id, formData) {
         user_id:formData.get('user_id'),
         start_date:formData.get('start_date'),
         user_type:formData.get('user_type'),
-        shop_id:shop_id ?? null
+        shop_id:currentState?.shop_id ?? null
     }
 
     // console.log(rawFormData);
-    const newUser = await supabase.from('user').upsert(rawFormData)
+    const newUser = await supabase.from('user').upsert(rawFormData).select()
 
     // console.log(formData, rawFormData, newShop);
 
 
     if(newUser.status == 201) {
         revalidateTag('users') 
-        if(shop_id) {
-            revalidateTag(`shop-${shop_id}-users`)
+        revalidatePath(`/shop/${currentState?.shop_id}/users`)
+        if(currentState.shop_id) {
+            revalidateTag(`shop-${currentState.shop_id}-users`)
         }
-        return {status:"ok", data:newUser}
+        return newUser
     }
 
     return {status:"error"}

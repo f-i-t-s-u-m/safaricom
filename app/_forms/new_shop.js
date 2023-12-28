@@ -14,65 +14,70 @@ import { Label } from "@/components/ui/label"
 
 import { SubmitButton } from "@/components/submit-button"
 import { createShop } from "../_actions/shop-actions"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import {useFormState} from 'react-dom'
 import { useRouter } from "next/navigation"
 
 
-export  function NewShop() {
+export  function NewShop({shop, variant = false, label="Add new shop", title="Create new shop", description = "Add new shop to your management dashboard"}) {
 
-  const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
+  const [showNewTeamDialog, setShowNewTeamDialog] = useState()
+  const handleFormWithShopId = createShop.bind(null, {id:shop?.id ?? undefined})
+  const [state, formAction] = useFormState(handleFormWithShopId, {...shop})
 
 const router = useRouter()
-  const handleForm = async (e) => {
-    const res = await createShop(e)
 
-  
-      if(res?.status == "ok") {
-        router.push(`shop/${res.data.data[0].id}`)
+
+
+    useEffect(() => {
+      if(state?.status == 201) {
         setShowNewTeamDialog(false)
-  
-      }
-  
-      else {
-        setError(res.data)
+        if(state.data[0].id ) {
+          router.push(`/shop/${state.data[0].id}`)
+        }
       }
 
-      return true
-    }
+      else {
+        console.log("error here new shop form");
+      }
+    
+    }, [state, router, shop])
+    
+
 
   return (
     <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
        
           
                   <DialogTrigger asChild>
-                  <Button  onClick={() => setShowNewTeamDialog(true)}>Add new shop</Button>
+                  <Button variant={variant} >{label}</Button>
                   </DialogTrigger>
           
           
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create new shop</DialogTitle>
+            <DialogTitle>{title}</DialogTitle>
             <DialogDescription>
-              Add new shop to your management dashboard
+              {description}
   
             </DialogDescription>
           </DialogHeader>
-          <form action={handleForm}>
+          <form action={formAction}>
             <div className="space-y-4 py-2 pb-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Shop name</Label>
-                <Input required id="name" name="name" placeholder="Shop name" />
+                <Input type="text" defaultValue={state.name} required id="name" name="name" placeholder="Shop name" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="location">Shop location</Label>
-                <Input id="location" required name="location" placeholder="Address" />
+                <Input id="location" defaultValue={state.location}  required name="location" placeholder="Address" />
               </div>
             </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowNewTeamDialog(false)}>
               Cancel
             </Button>
-            <SubmitButton />
+            <SubmitButton label={label == "Edit" ? "Update" : undefined} />
           </DialogFooter>
           </form>
         </DialogContent>
