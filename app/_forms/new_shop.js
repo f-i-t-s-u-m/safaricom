@@ -33,7 +33,9 @@ const router = useRouter()
       if(state?.status == 201) {
         setShowNewTeamDialog(false)
         if(state.data[0].id ) {
-          router.push(`/shop/${state.data[0].id}`)
+          // router.refresh()
+          router.push(`/shops`)
+          // router.push(`/shop/${state.data[0].id}`)
         }
       }
 

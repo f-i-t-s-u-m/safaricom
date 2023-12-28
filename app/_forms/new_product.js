@@ -33,7 +33,7 @@ export function NewProduct() {
       console.log("error here new shop form");
     }
   
-  }, [state])
+  }, [state, router])
 
   return (
     <Dialog open={showDialog} onOpenChange={setShowDialog}>

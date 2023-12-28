@@ -94,7 +94,7 @@ export async function createShop(currentState, someData, formData) {
         return newShop
     }
 
-    console.log("action  ", newShop);
+    // console.log("action  ", newShop);
 
     return {status:"error", data:"somthing went wrong"}
 
