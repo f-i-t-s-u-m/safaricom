@@ -21,21 +21,22 @@ import { Calendar } from "@/components/ui/calendar"
 import CalendarDateRangePicker from "@/components/calendar-date-range-picker"
 import { SubmitButton } from "@/components/submit-button"
 import {useFormState} from 'react-dom'
+import { useRouter } from "next/navigation"
 
 
 export  function NewSales({user}) {
 
   // const [userData, setUserData] = useState()
   const [products, setProduct] = useState()
-  const [saleDate, setSaleDate] = useState()
+  const [saleDate, setSaleDate] = useState( new Date())
+  const [showDialog, setShowDialog] = useState()
   const handleFormWithShopId = createSales.bind(null, {user_id:user.id, shop_id: user.shop_id, date:saleDate})
   const [state, formAction] = useFormState(handleFormWithShopId, {})
 
+  const router = useRouter()
+
     useEffect(() => {
-      //  allUsers().then(e => {
-      //   setUserData(e)
-      //   // return e
-      //  })
+  
 
        allProducts().then(e => {
         setProduct(e)
@@ -43,10 +44,22 @@ export  function NewSales({user}) {
 
     }, [])
 
+
+    useEffect(() => {
+      if(state?.status == 201) {
+        setShowDialog(false)
+          router.push(`/shop/${user.shop_id}/users`)
+      }
+
+      else {
+        console.log("error here new shop form");
+      }
+    }, [state, router, user])
+
   
 
   return (
-    <Dialog >
+    <Dialog open={showDialog} onOpenChange={setShowDialog} >
       <DialogTrigger asChild>
         <Button >Add Sales</Button>
 

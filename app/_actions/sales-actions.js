@@ -2,7 +2,7 @@
 
 import { thisMonthSales } from "@/lib/sales-lib"
 import supabase from "@/lib/supabase"
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 
 export async function allSales(group=false) {
@@ -55,18 +55,7 @@ export async function shopSale(id, filterBy = {}, stat = false,) {
 export async function createSales(getInfo, someData, formData) {
 
 
-    // console.log(getInfo);
-    // const rawFormData = {
-    //     id:formData?.get('id') ?? undefined,
-    //     product_id:formData.get('product_id'),
-    //     user_id:formData.get('user_id'),
-    //     quantity: parseInt(formData.get('quantity')),
-    //     // shop_id:shop_id,
-       
-    // }
-
-    // const form = new formidable()
-
+  
     const sales = Object.keys(Object.fromEntries(formData))
     ?.map((item) => {
         return {
@@ -78,29 +67,19 @@ export async function createSales(getInfo, someData, formData) {
         }
     }).filter(e => e.quantity && e.product_id)
 
-    // console.log(newData);
-    // newData.forEach(e => console.log(e))
-    // console.log(newData['c98c5e0c-6050-4dc0-84e6-8b56cb8e49d5']);
-
-    // console.log(JSON.stringify(Object.fromEntries(formData)));
-    // formData?.map(items => console.log(items))
-
-
-    
-    // return ""
-    // console.log(sales);
-    const newSales = await supabase.from('sales').insert(sales)
+  
+    const newSales = await supabase.from('sales').upsert(sales)
 
 
 
     if(newSales.status == 201) {
         revalidateTag(`shop-${getInfo.shop_id}-sales`)
         revalidateTag(`sales`)
+        revalidatePath(`/shop/${getInfo.shop_id}/sales`)
         
-        return {status:"ok"}
+        return newSales
     }
 
-    // console.log(newSales.error);
 
     return {status:"error", data:newSales.error}
 

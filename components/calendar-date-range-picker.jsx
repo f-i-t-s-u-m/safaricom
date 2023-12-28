@@ -16,12 +16,14 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export default function CalendarDateRangePicker({
-  className, mode="range", onChange, url = null
+  className, mode="range", onChange = null, url = null
 }) {
   const searchParams  = useSearchParams()
   const getFilterBy = searchParams.get("filterBy") ?? 'week';
+  
+  const generateDate = onChange ? new Date() : {to: new Date(), from: subDays(new Date(), 7)}
 
-  const [date, setDate] = React.useState({to: new Date(), from: subDays(new Date(), 7)})
+  const [date, setDate] = React.useState(generateDate)
 
   const router = useRouter()
 
@@ -34,11 +36,18 @@ export default function CalendarDateRangePicker({
 
   const handleChange = (date) => {
     setDate(date)
-    console.log(date);
-    // onChange(date)
-    const startDate = date.from.toISOString().slice(0,10)
-    const endDate = date.to.toISOString().slice(0,10)
-    router.push(`${pathname}?from=${startDate}&to=${endDate}`);
+    // console.log(date);
+    if(onChange) {
+      onChange(date)
+    }
+
+    else {
+
+      // onChange(date)
+      const startDate = date.from.toISOString().slice(0,10)
+      const endDate = date.to.toISOString().slice(0,10)
+      router.push(`${pathname}?from=${startDate}&to=${endDate}`);
+    }
   }
 
   return (
