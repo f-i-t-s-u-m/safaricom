@@ -11,7 +11,7 @@ export default async function page({children, params}) {
     
   return (
     <div className='my-10 px-16'>
-      <div className='border-b py-10 flex justify-between items-center '>
+      <div className='border-b py-10 flex justify-between items-center'>
 
       <div className='flex  items-center text-black gap-y-1 '>
       <Avatar className="h-24 w-24 shadow ">

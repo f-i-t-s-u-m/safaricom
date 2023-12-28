@@ -1,7 +1,7 @@
 'use server'
 
 import supabase from "@/lib/supabase"
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 
 export async function allProducts() {
@@ -25,10 +25,10 @@ export async function allProducts() {
 
 
 
-export async function createProduct(formData) {
+export async function createProduct(state, formData) {
 
 
-
+   
     const rawFormData = {
         id:formData?.get('id') ?? undefined,
         name:formData.get('name'),
@@ -38,16 +38,15 @@ export async function createProduct(formData) {
        
     }
 
-    console.log(rawFormData);
-    const newProduct = await supabase.from('product').upsert(rawFormData)
+    const newProduct = await supabase.from('product').upsert(rawFormData).select()
 
     // console.log(formData, rawFormData, newShop);
 
 
     if(newProduct.status == 201) {
         revalidateTag('products') 
-        
-        return {status:"ok", data:newProduct}
+        revalidatePath('/products')
+        return newProduct
     }
 
     return {status:"error"}
