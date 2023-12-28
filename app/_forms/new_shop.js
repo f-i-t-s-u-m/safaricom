@@ -32,9 +32,9 @@ const router = useRouter()
     useEffect(() => {
       if(state?.status == 201) {
         setShowNewTeamDialog(false)
+        router.push(`/shops`)
         if(state.data[0].id ) {
           // router.refresh()
-          router.push(`/shops`)
           // router.push(`/shop/${state.data[0].id}`)
         }
       }
