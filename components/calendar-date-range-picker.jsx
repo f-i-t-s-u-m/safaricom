@@ -44,8 +44,8 @@ export default function CalendarDateRangePicker({
     else {
 
       // onChange(date)
-      const startDate = date.from.toISOString().slice(0,10)
-      const endDate = date.to.toISOString().slice(0,10)
+      const startDate = date.from?.toISOString()?.slice(0,10)
+      const endDate = date.to?.toISOString()?.slice(0,10)
       router.push(`${pathname}?from=${startDate}&to=${endDate}`);
     }
   }
