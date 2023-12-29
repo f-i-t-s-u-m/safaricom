@@ -9,7 +9,9 @@ export async function listShop() {
     const res = await fetch(`${process.env.BASE_URL}/api/shop`, {
         next:{
             tags:['shops']
-        }
+        }, 
+
+        cache:'no-store'
     })
 
     return res.json()
