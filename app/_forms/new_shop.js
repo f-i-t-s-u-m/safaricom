@@ -31,12 +31,15 @@ const router = useRouter()
 
     useEffect(() => {
       if(state?.status == 201) {
+        console.log("state of mind - ", state);
         setShowNewTeamDialog(false)
-        router.push(`/shops`)
-        if(state.data[0].id ) {
-          // router.refresh()
-          // router.push(`/shop/${state.data[0].id}`)
-        }
+        // router.push(`/shops`)
+        router.refresh()
+        // if(state.data[0].id ) {
+        //   // router.refresh()
+        //   // router.push(`/shop/${state.data[0].id}`)
+        //   console.log();
+        // }
       }
 
       else {
