@@ -14,8 +14,8 @@ export async function GET(request, {params}) {
     const {data, error} =  await supabase.from('sale_revenue')
     .select('*')
     .eq('user_id', id)
-    .gt("date", from)
-    .lt("date", to)
+    .gte("date", from)
+    .lte("date", to)
 
     if (error) {
         console.log(error)

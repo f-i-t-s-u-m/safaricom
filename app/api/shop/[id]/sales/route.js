@@ -15,8 +15,8 @@ export async function GET(request, {params}) {
             *, user(*)
           `)
           .eq('shop_id', id)
-          .gt("date", from)
-          .lt("date", to )
+          .gte("date", from)
+          .lte("date", to )
           
 
 
