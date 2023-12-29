@@ -33,8 +33,8 @@ const router = useRouter()
       if(state?.status == 201) {
         console.log("state of mind - ", state);
         setShowNewTeamDialog(false)
-        // router.push(`/shops`)
-        router.refresh()
+        router.push(`/shops`)
+        
         // if(state.data[0].id ) {
         //   // router.refresh()
         //   // router.push(`/shop/${state.data[0].id}`)
