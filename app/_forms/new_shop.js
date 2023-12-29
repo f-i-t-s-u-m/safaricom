@@ -17,6 +17,7 @@ import { createShop } from "../_actions/shop-actions"
 import { useEffect, useState } from "react"
 import {useFormState} from 'react-dom'
 import { useRouter } from "next/navigation"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 
 export  function NewShop({shop, variant = false, label="Add new shop", title="Create new shop", description = "Add new shop to your management dashboard"}) {
@@ -33,8 +34,8 @@ const router = useRouter()
       if(state?.status == 201) {
         console.log("state of mind - ", state);
         setShowNewTeamDialog(false)
-        router.push(`/shops`)
-        
+        // revalidatePath('shops')
+        router.refresh()
         // if(state.data[0].id ) {
         //   // router.refresh()
         //   // router.push(`/shop/${state.data[0].id}`)
@@ -45,6 +46,8 @@ const router = useRouter()
       else {
         console.log("error here new shop form");
       }
+
+      return
     
     }, [state, router, shop])
     

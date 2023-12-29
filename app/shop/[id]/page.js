@@ -30,7 +30,7 @@ import { getTotalSales, shopSale } from "@/app/_actions/sales-actions"
 
 export default async function DashboardPage({params, searchParams}) {
   const {id} = params
-  const shop = await getShop(id)
+  // const shop = await getShop(id)
 
   const {from, to} = searchParams
   const totalSales = await shopSale(id, {from, to}, true, false)

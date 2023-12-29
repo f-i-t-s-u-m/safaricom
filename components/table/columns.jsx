@@ -11,7 +11,7 @@ export const columns= [
       <DataTableColumnHeader  column={column} title="User ID" />
     ),
     cell: ({ row }) => (
-      row.original.user.user_id
+      row.original.user?.user_id
     ),
 
   },
@@ -22,7 +22,7 @@ export const columns= [
     header: ({ column }) => (
       <DataTableColumnHeader className=" text-right " column={column} title="User" />
     ),
-    cell: ({ row }) => row.original.user.name,
+    cell: ({ row }) => row.original.user?.name,
   },
   {
     id:"name",

@@ -1,10 +1,11 @@
 import { getTotalSales } from '@/app/_actions/sales-actions'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { calculateTotals } from '@/lib/sales-lib'
 import React from 'react'
 
 export default async function DashboardCards({totalSales}) {
 
-
+ const stat = calculateTotals(totalSales)
 
 
   return (
@@ -28,7 +29,7 @@ export default async function DashboardCards({totalSales}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.total?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{stat.total?.toLocaleString() ?? 0}</div>
                     
                   </CardContent>
                 </Card>
@@ -53,7 +54,7 @@ export default async function DashboardCards({totalSales}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.air_time?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{stat?.air_time?.toLocaleString() ?? 0}</div>
                    
                   </CardContent>
                 </Card>
@@ -75,7 +76,7 @@ export default async function DashboardCards({totalSales}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.sim_card?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{stat?.sim_card?.toLocaleString() ?? 0}</div>
                   
                   </CardContent>
                 </Card>
@@ -98,7 +99,7 @@ export default async function DashboardCards({totalSales}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.device?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{stat?.device?.toLocaleString() ?? 0}</div>
                    
                   </CardContent>
                 </Card>

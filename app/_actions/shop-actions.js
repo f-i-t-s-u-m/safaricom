@@ -90,8 +90,6 @@ export async function createShop(currentState, someData, formData) {
 
 
     if(newShop.status == 201) {
-
-        revalidateTag('shops')
         // revalidatePath('/shops')
         return newShop
     }

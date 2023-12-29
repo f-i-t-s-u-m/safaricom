@@ -1,12 +1,17 @@
 import { getTotalSales } from '@/app/_actions/sales-actions'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { calculateTotals } from '@/lib/sales-lib'
 import React from 'react'
 
 export default async function Page({params, searchParams}) {
   const {id} = params
   const {from, to} = searchParams
-  const totalSales = await getTotalSales({from, to}, id)
+  const sales = await getTotalSales({from, to}, id)
 
+
+  const generateSales = calculateTotals(sales)
+  // useMemo(() => TotalSales(sales), [sales])
+  
 
 
   return (
@@ -30,7 +35,7 @@ export default async function Page({params, searchParams}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.total?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{generateSales?.total?.toLocaleString() ?? 0}</div>
                     
                   </CardContent>
                 </Card>
@@ -55,7 +60,7 @@ export default async function Page({params, searchParams}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.air_time?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{generateSales.air_time?.toLocaleString() ?? 0}</div>
                     
                   </CardContent>
                 </Card>
@@ -77,7 +82,7 @@ export default async function Page({params, searchParams}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.sim_card?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{generateSales?.sim_card?.toLocaleString() ?? 0}</div>
                     
                   </CardContent>
                 </Card>
@@ -100,7 +105,7 @@ export default async function Page({params, searchParams}) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{totalSales[0]?.device?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-bold">{generateSales?.device?.toLocaleString() ?? 0}</div>
                    
                   </CardContent>
                 </Card>

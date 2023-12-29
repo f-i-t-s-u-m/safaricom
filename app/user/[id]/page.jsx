@@ -7,7 +7,7 @@ import React from 'react'
 export default async function page({children, params}) {
     const {id} = params
     const user = await getUser(id)
-    const sales = await userSales()
+    const sales = await userSales(id)
     
   return (
     <div className='my-10 px-16'>

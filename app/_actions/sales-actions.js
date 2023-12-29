@@ -40,6 +40,13 @@ export async function shopSale(id, filterBy = {}, stat = false,) {
                 tags:['sales']
             }
         })
+
+
+        if(stat) {
+            const sales = await res.json()
+            return thisMonthSales(sales)
+        }
+
         return res.json()
         
     } catch {
@@ -73,9 +80,9 @@ export async function createSales(getInfo, someData, formData) {
 
 
     if(newSales.status == 201) {
-        revalidateTag(`shop-${getInfo.shop_id}-sales`)
-        revalidateTag(`sales`)
+        revalidateTag('sales')
         revalidatePath(`/shop/${getInfo.shop_id}/sales`)
+        revalidatePath('/')
         
         return newSales
     }

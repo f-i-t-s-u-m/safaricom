@@ -12,7 +12,7 @@ export async function GET(request, {params}) {
 
 
     const {data, error} =  await supabase.from('sale_revenue')
-    .select('*')
+    .select('*, user(*)')
     .eq('user_id', id)
     .gte("date", from)
     .lte("date", to)
