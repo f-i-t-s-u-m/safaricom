@@ -3,10 +3,7 @@ import supabase from "@/lib/supabase";
 
 export async function GET(request, { params }) {
   const { id } = params;
-  const { data } = await supabase
-    .from("user")
-    .select("*, shop!user_shop_id_fkey(name)")
-    .eq("id", id);
+  const { data, error } = await supabase.from("plan").select().eq("shop_id", id);
 
   if (error) {
     console.log(error);
@@ -17,7 +14,7 @@ export async function GET(request, { params }) {
     console.log("No data found");
     return NextResponse.json([]);
   }
-  
+ 
 
   return NextResponse.json(data, { status: 200 });
 }

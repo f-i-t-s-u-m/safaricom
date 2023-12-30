@@ -4,27 +4,34 @@ import {
     AvatarFallback,
     AvatarImage,
   } from "@/components/ui/avatar"
+import { LProgressBar } from "./progressBar"
+import { shopPlan } from "@/app/_actions/plan-actions"
+import { NewPlan } from "@/app/_forms/new_plan"
+import { getFirstLastDaysOfMon } from "@/lib/dates-lib"
+import { shopSale } from "@/app/_actions/sales-actions"
+import { calculateTotals } from "@/lib/sales-lib"
   
   export default async function RecentSales({id}) {
-    const users = await listShopUsers(id)
-    return (
-      <div className="space-y-8">
-        {users?.map(e => (
+    const plan = await shopPlan(id)
+    const [start, end] = getFirstLastDaysOfMon()
+    const shopMonthlySales = await shopSale(id, {start, end}, true)
+    const totalSales = calculateTotals(shopMonthlySales)
+    console.log("plan ", plan);
+    if(plan.length) {
 
-          <div key={e.id} className="flex items-center">
-          <Avatar className="h-9 w-9">
-            <AvatarImage src="/avatars/01.png" alt="Avatar" />
-            <AvatarFallback>OM</AvatarFallback>
-          </Avatar>
-          <div className="ml-4 space-y-1">
-            <p className="text-sm font-medium leading-none capitalize">{e.name}</p>
-            <p className="text-sm text-muted-foreground">
-              {e.phone}
-            </p>
-          </div>
-          <div className="ml-auto font-medium">+$1,999.00</div>
-        </div>
-        ))}
-        </div>
+      return (
+        
+        <div className="space-y-5">
+        
+        <LProgressBar label="Airtime" target={plan[0].airtime}  sales={totalSales.air_time} />
+        <LProgressBar label="Sim Card" target={plan[0].sim_card}  sales={totalSales.sim_card} />
+        <LProgressBar label="Device" target={plan[0].device}  sales={totalSales.device} />
+    
+        </div> 
+  )
+} else {
+  return (
+    <NewPlan shop_id={id} />
     )
+}
   }

@@ -18,13 +18,14 @@ import { useEffect, useState } from "react"
 import {useFormState} from 'react-dom'
 import { useRouter } from "next/navigation"
 import { revalidatePath, revalidateTag } from "next/cache"
+import { upsertPlan } from "../_actions/plan-actions"
 
 
-export  function NewShop({shop, variant = false, label="Add new shop", title="Create new shop", description = "Add new shop to your management dashboard"}) {
+export  function NewPlan({id, shop_id, variant = false, label="Add new plan", title="Create new plan", description = "Add new plan to your shop dashboard"}) {
 
   const [showDialog, setShowDialog] = useState()
-  const handleFormWithShopId = createShop.bind(null, {id:shop?.id ?? undefined})
-  const [state, formAction] = useFormState(handleFormWithShopId, {...shop})
+  const handleFormWithShopId = upsertPlan.bind(null, {id: id, shop_id: shop_id ?? undefined})
+  const [state, formAction] = useFormState(handleFormWithShopId, {})
 
 const router = useRouter()
 
@@ -49,7 +50,7 @@ const router = useRouter()
 
       return
     
-    }, [state, router, shop])
+    }, [state, router])
     
 
 
@@ -73,13 +74,27 @@ const router = useRouter()
           <form action={formAction}>
             <div className="space-y-4 py-2 pb-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Shop name</Label>
-                <Input type="text" defaultValue={state.name} required id="name" name="name" placeholder="Shop name" />
+                <Label htmlFor="airtime">Airtime target</Label>
+                <Input type="number" defaultValue={state.airtime} required id="airtime" name="airtime" placeholder="Monthly airtime target" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="location">Shop location</Label>
-                <Input id="location" defaultValue={state.location}  required name="location" placeholder="Address" />
+                <Label htmlFor="sim_card">Sim Card target</Label>
+                <Input id="sim_card" type="number" defaultValue={state.sim_card}  required name="sim_card" placeholder="Monthly sim card target" />
               </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="device">Device target</Label>
+                <Input id="device" type="number" defaultValue={state.device}  required name="device" placeholder="Monthly device target" />
+              </div>
+
+              <div className="space-y-3">
+            <Label htmlFor="startDate" className="text-right" >
+              Month
+            </Label>
+            <Input id="date" type="date" name="date" placeholder="Year-Month-Day"  className="col-span-3" />
+          </div>
+
+              
             </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowDialog(false)}>

@@ -17,16 +17,18 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+import Link from "next/link"
+import { DeleteSalesAlert, EditSale } from "@/app/_forms/edit_sales"
 
-import { labels } from "../data/data"
-import { taskSchema } from "../data/schema"
 
 
 
 export function DataTableRowActions({
   row,
 }) {
-  const task = taskSchema.parse(row.original)
+
+  const userId = row.original?.user?.id
+
 
   return (
     <DropdownMenu>
@@ -40,26 +42,20 @@ export function DataTableRowActions({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={e => e.preventDefault()}>
+          <EditSale data={row.original} />
+        </DropdownMenuItem>
         <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          <Link className="block w-full" href={`/user/${userId}`}>
+
+          View User
+          </Link>
+          </DropdownMenuItem>
+        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={e => e.preventDefault()}>
+          <DeleteSalesAlert id={row.original.id} />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

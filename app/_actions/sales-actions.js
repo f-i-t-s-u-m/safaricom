@@ -10,11 +10,13 @@ export async function allSales(group=false) {
     try {
 
         
-        const res = await fetch(`${process.env.BASE_URL}/api/sales`, {
-            next:{
-                tags:['sales']
-            }
-        })
+        const res = await fetch(`${process.env.BASE_URL}/api/sales`, 
+        { 
+            next: { 
+                tags: ['sales']
+            } 
+
+    })
         
         return res.json()
     } catch {
@@ -28,7 +30,7 @@ export async function allSales(group=false) {
 }
 
 
-export async function shopSale(id, filterBy = {}, stat = false,) {
+export async function shopSale(id, filterBy = {}, stat = false) {
 
     const filterQuery = `?from=${filterBy?.from}&to=${filterBy?.to}`
     const url = `${process.env.BASE_URL}/api/shop/${id}/sales${!!filterBy?.from ? filterQuery : ''}`
@@ -39,6 +41,7 @@ export async function shopSale(id, filterBy = {}, stat = false,) {
             next:{
                 tags:['sales']
             }
+            
         })
 
 
@@ -75,7 +78,7 @@ export async function createSales(getInfo, someData, formData) {
     }).filter(e => e.quantity && e.product_id)
 
   
-    const newSales = await supabase.from('sales').upsert(sales)
+    const newSales = await supabase.from('sales').insert(sales)
 
 
 
@@ -91,6 +94,40 @@ export async function createSales(getInfo, someData, formData) {
     return {status:"error", data:newSales.error}
 
 }
+
+export async function updateSales(getInfo, someData, formData) {
+
+    // console.log("getInfo - ", getInfo, "someData - ", someData, "formdate - ",  formData);
+   
+    const quantity = formData.get('quantity');
+
+    const updateRes = await supabase.from('sales').update({
+        ...getInfo, quantity
+    }).eq('id', getInfo.id)
+
+    // console.log(updateRes);
+
+    if(updateRes.status == 204) {
+        revalidateTag('sales')
+        // revalidateTag('/sales')
+        // revalidatePath(`/shop/${getInfo.shop_id}/sales`)
+        // revalidatePath('/')
+    }
+
+    return updateRes
+
+}
+
+export async function deleteSale(data) {
+
+   
+
+    const deleteRes = await supabase.from('sales').delete().eq('id', data.id)
+
+    // console.log(deleteRes);
+    return deleteRes
+}
+
 
 export async function getTotalSales(filterBy) {
     

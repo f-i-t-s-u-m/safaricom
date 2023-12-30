@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import supabase from "@/lib/supabase";
 
 export async function GET(request) {
-    const {data, error} =  await supabase.from('user').select()
+    const {data, error} =  await supabase.from('plan').select()
     // console.log("api  data", data.length, "error", error);
     if (error) {
         console.log(error)
@@ -13,6 +13,6 @@ export async function GET(request) {
         console.log('No data found')
         return  NextResponse.json([])
       }
-    // console.log("api  data",  "error", error);
+
     return  NextResponse.json(data, {status:200})
 }
