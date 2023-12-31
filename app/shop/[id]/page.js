@@ -46,34 +46,15 @@ export default async function DashboardPage({params, searchParams}) {
               <DashboardCards totalSales={totalSales} />
               
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle>Overview</CardTitle>
-                    <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="analytics" disabled>
-                Analytics
-              </TabsTrigger>
-              <TabsTrigger value="reports" disabled>
-                Reports
-              </TabsTrigger>
-              <TabsTrigger value="notifications" disabled>
-                Notifications
-              </TabsTrigger>
-            </TabsList>
-            </Tabs>
-                  </CardHeader>
-                  <CardContent className="pl-2">
-                    <Overview />
-                  </CardContent>
-                </Card>
+               
+                    <Overview data={totalSales}/>
+                 
                 <Card className="col-span-3">
                   <CardHeader>
-                    <CardTitle>Recent Sales</CardTitle>
+                    <CardTitle>Target and Achievement</CardTitle>
                      
                     <CardDescription>
-                      You made 265 sales this month.
+                      This month target and achievement report
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
