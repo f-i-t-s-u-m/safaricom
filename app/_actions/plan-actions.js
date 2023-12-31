@@ -12,6 +12,7 @@ export async function allPlanes() {
         
         const res = await fetch(`${process.env.BASE_URL}/api/plan`, 
         { 
+            cache:'no-cache',
             next: { 
                 tags: ['plans']
             } 
@@ -37,6 +38,7 @@ export async function shopPlan(id) {
     try {
 
         const res = await fetch(url, {
+            cache:'no-cache',
             next:{
                 tags:['plans']
             }

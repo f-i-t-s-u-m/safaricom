@@ -9,6 +9,7 @@ export async function allProducts() {
 
     try {
         const res = await fetch(`${process.env.BASE_URL}/api/product`, {
+            cache:'no-cache',
             next:{
                 tags:['products']
             }

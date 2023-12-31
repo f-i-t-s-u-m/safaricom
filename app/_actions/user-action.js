@@ -49,6 +49,7 @@ export async function userSales(id, filterBy = {}, stat = false,) {
     try {
 
         const res = await fetch(url, {
+            cache:'no-cache',
             next:{
                 tags:['sales']
             }

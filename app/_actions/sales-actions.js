@@ -12,6 +12,7 @@ export async function allSales(group=false) {
         
         const res = await fetch(`${process.env.BASE_URL}/api/sales`, 
         { 
+            cache:'no-cache',
             next: { 
                 tags: ['sales']
             } 
@@ -38,6 +39,7 @@ export async function shopSale(id, filterBy = {}, stat = false) {
     try {
 
         const res = await fetch(url, {
+            cache:'no-cache',
             next:{
                 tags:['sales']
             }
@@ -136,6 +138,7 @@ export async function getTotalSales(filterBy) {
     try {
 
         const res = await fetch(`${process.env.BASE_URL}/api/sales/total${!!filterBy?.from ? filterQuery : ''}`, {
+            cache:'no-cache',
             next:{
                 tags:['sales']
             }

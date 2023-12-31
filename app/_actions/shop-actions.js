@@ -7,6 +7,7 @@ import { redirect } from "next/navigation"
 export async function listShop() {
     try {
     const res = await fetch(`${process.env.BASE_URL}/api/shop`, {
+        cache:'no-cache',
         next:{
             tags:['shops']
         }, 
@@ -28,6 +29,7 @@ export async function getShop(id) {
 
     try {
     const res = await fetch(`${process.env.BASE_URL}/api/shop/${id}`, {
+        cache:'no-cache',
         next:{
             tags:[`shop-${id}`]
         }
@@ -48,6 +50,7 @@ export async function listShopUsers(id) {
     try {
 
         const res = await fetch(`${process.env.BASE_URL}/api/shop/${id}/users`, {
+            cache:'no-cache',
             next:{
                 tags:[`shop-${id}-users`]
             }
