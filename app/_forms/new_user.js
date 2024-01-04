@@ -67,7 +67,7 @@ export function NewUser({shop_id, user, variant = false, label="Add new user", t
             <Label htmlFor="userId" className="text-right">
               User Id
             </Label>
-            <Input id="userId" type="number" name="user_id"  className="col-span-3" />
+            <Input id="userId" type="text" name="user_id"  className="col-span-3" />
           </div>
 
           <div className="space-y-3">

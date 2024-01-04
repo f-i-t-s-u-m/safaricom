@@ -19,9 +19,9 @@ export default async function page({children, params}) {
           </Avatar>
           <div className='pl-5 text-gray-700'>
 
-            <div className='font-bold text-lg tracking-wider'>{user.name} </div>
-            <div  className='pl-2 py-1'> {user.phone}</div>
-            <div className='pl-2 capitalize'> {user.shop?.name} | <span className=' uppercase'>{user.user_type}</span> </div>
+            <div className='font-bold text-lg tracking-wider'>{user[0].name} </div>
+            <div  className='pl-2 py-1'> {user[0].phone}</div>
+            <div className='pl-2 capitalize'> {user[0].shop?.name} | <span className=' uppercase'>{user[0].user_type}</span> </div>
           </div>
       </div>
 
