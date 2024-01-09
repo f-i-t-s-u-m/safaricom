@@ -1,0 +1,38 @@
+[Company Name],,,,,,INVOICE,,,
+[Street Address],,,,,,,,,INVOICE TEMPLATES BY VERTEX42.COM
+"[City, ST  ZIP]",,,,,,,,,https://www.vertex42.com/ExcelTemplates/invoice-templates.html
+Phone: (000) 000-0000,,,,,INVOICE #,,DATE,,
+,,,,,2034,,2/21/2018,,
+,,,,,,,,,
+BILL TO,,,,,CUSTOMER ID,,TERMS,,← You can change TERMS to DUE DATE and enter a date (usually 30 days after the invoice date)
+[Name],,,,,564,,Due Upon Receipt,,
+[Company Name],,,,,,,,,
+[Street Address],,,,,,,,,
+"[City, ST  ZIP]",,,,,,,,,HOW TO SEND AN INVOICE TO A CLIENT
+[Phone],,,,,,,,,1) Save or Print the worksheet as a PDF
+[Email Address],,,,,,,,,2) Save a copy of the invoice for your records
+,,,,,,,,,3) Email the PDF to the client
+user name,user id,sim card,10 birr card,,20 birr card,25 birr card,50 birr card,,
+Service fee,1001,30,50,,1, 96.00 , 30.00 ,,
+Labor: 5 hours at $75/hr,2001,50,60,,5, 96.00 , 30.00 ,,
+New client discount,3001,20,10,,, 30.00 , 20.00 ,,← The QTY is assumed to be 1 if it is left blank
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+,,,,,,, -   ,,
+Thank you for your business!,,,,,SUBTOTAL,, 80.00 ,,
+,,,,,TAX RATE,,4.250%,,← Enter the appropriate tax rate
+,,,,,TAX,, 3.40 ,,
+,,,,,TOTAL,, $83.40 ,,← Change the currency by editing the cell format
+,,,,,,,,,"← Enter a note such as ""Paid in full. Thank you!"" if this is a receipt"
+,,,,,,,,,
+"If you have any questions about this invoice, please contact",,,,,,,,,
+"[Name, Phone, email@address.com]",,,,,,,,,"← Remember to update this information, or delete these two rows."

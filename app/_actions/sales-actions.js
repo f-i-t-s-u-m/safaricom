@@ -2,7 +2,11 @@
 
 import { thisMonthSales } from "@/lib/sales-lib"
 import supabase from "@/lib/supabase"
+import  csvToJson  from "convert-csv-to-json"
+import { writeFile } from "fs/promises"
 import { revalidatePath, revalidateTag } from "next/cache"
+import { allProducts } from "./product-actions"
+import { listShopUsers } from "./shop-actions"
 
 
 export async function allSales(group=false) {
@@ -155,4 +159,69 @@ export async function getTotalSales(filterBy) {
 
 // export  function generateReport ()
 
+export async function upload_csv(bindData, init_data, formData) {
+    // console.log(formData);
+    const path = "public/upload/test10.csv"
 
+    
+
+    const date = formData.get("date")
+
+    const parseSales = csvToJson.indexHeader(14).fieldDelimiter(',').getJsonFromCsv(path)
+   
+    const filterParseSales = parseSales.filter(e => e.UserID && e.UserName && e.UserID != "Total");
+    const results = await prepareSalesData(filterParseSales, date, bindData?.shop_id)
+
+    if(!results.length) {   
+        return {staus:"403", message:"no data to insert"}
+    }
+    const newSales = await supabase.from('sales').insert(results)
+
+    return newSales
+
+}
+
+
+
+async function prepareSalesData(data, date, shop_id) {
+
+    const results = []
+   const products = await allProducts()
+   const salers = await listShopUsers(shop_id)
+
+        data.forEach(user => { 
+            
+            // console.log(Object.keys(user));
+            let userId = user['UserID']
+            let userInfo = salers.filter(saler => saler?.user_id == userId)
+            // console.log(userInfo, "done");
+            let soldProducts = Object.keys(user)
+            
+            soldProducts.forEach(name => {
+                if(parseInt(user[name])) {
+
+                    let linkedProduct = products.filter(pro => pro.name.replaceAll(" ", '') == name)
+                    if(linkedProduct.length) {
+                        
+                        let salesItem = {
+                            user_id: userInfo?.[0]?.id,
+                            product_id: linkedProduct?.[0]?.id,
+                            shop_id: shop_id,
+                            date:date,
+                            quantity: parseInt(user[name])
+                        
+                    }
+
+                    results.push(salesItem)
+                }
+            }
+            })
+            
+
+
+    })
+   
+
+    return results
+
+}

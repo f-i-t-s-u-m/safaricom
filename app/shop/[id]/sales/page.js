@@ -1,4 +1,5 @@
 import { shopSale } from "@/app/_actions/sales-actions"
+import CsvUpload from "@/app/_forms/csv_upload"
 import { NewSales } from "@/app/_forms/new_sales"
 import { DataTable } from "@/components/data-table"
 import {
@@ -27,6 +28,7 @@ import {
 <div className="flex justify-between items-center">
 <h1 className="text-3xl font-bold tracking-tight py-10">Sales</h1>
 {/* <NewSales user={} /> */}
+<CsvUpload shop_id={id} />
 {/* {filterBy} */}
 </div>
       {/* {JSON.stringify(getSales)} */}
