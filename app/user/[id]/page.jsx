@@ -1,7 +1,9 @@
 import { getUser, userSales } from '@/app/_actions/user-action'
+import { NewUser } from '@/app/_forms/new_user'
 import CalendarDateRangePicker from '@/components/calendar-date-range-picker'
 import { DataTable } from '@/components/data-table'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Pencil1Icon } from '@radix-ui/react-icons'
 import React from 'react'
 
 export default async function page({children, params}) {
@@ -19,8 +21,8 @@ export default async function page({children, params}) {
           </Avatar>
           <div className='pl-5 text-gray-700'>
 
-            <div className='font-bold text-lg tracking-wider'>{user[0].name} </div>
-            <div  className='pl-2 py-1'> {user[0].phone}</div>
+            <div className='font-bold text-lg tracking-wider'>{user[0].name} : <NewUser label={<Pencil1Icon />} title='Update User' description='Update existing user info' user={user[0]} /></div>
+            <div  className='pl-2 py-1'> {user[0].phone} | {user[0]?.user_id}</div>
             <div className='pl-2 capitalize'> {user[0].shop?.name} | <span className=' uppercase'>{user[0].user_type}</span> </div>
           </div>
       </div>

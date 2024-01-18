@@ -72,15 +72,18 @@ export async function createUser(currentState, bindData, formData) {
 
 
     
-
+    // console.log(formData);
+    // console.log(currentState);
+    // console.log(bindData);
+    // return 1
     const rawFormData = {
-        id:formData?.get('id') ?? undefined,
+        id:formData?.get('id') ?? currentState?.id,
         name:formData.get('name'),
         phone:formData.get('phone'),
         user_id:formData.get('user_id'),
         start_date:formData.get('start_date'),
         user_type:formData.get('user_type'),
-        shop_id:currentState?.shop_id ?? null
+        shop_id:currentState?.shop_id ?? undefined
     }
 
     // console.log(rawFormData);

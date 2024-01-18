@@ -2,11 +2,12 @@
 
 import { thisMonthSales } from "@/lib/sales-lib"
 import supabase from "@/lib/supabase"
-import  csvToJson  from "convert-csv-to-json"
+import  csvToJson, { csvStringToJson }  from "convert-csv-to-json"
 import { writeFile } from "fs/promises"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { allProducts } from "./product-actions"
 import { listShopUsers } from "./shop-actions"
+// import formidable from "formidable"
 
 
 export async function allSales(group=false) {
@@ -161,22 +162,34 @@ export async function getTotalSales(filterBy) {
 
 export async function upload_csv(bindData, init_data, formData) {
     // console.log(formData);
-    const path = "public/upload/test10.csv"
+    const path = "public/upload/safari.csv"
 
     
-
+    
+    const file = formData.get('file')
     const date = formData.get("date")
 
-    const parseSales = csvToJson.indexHeader(14).fieldDelimiter(',').getJsonFromCsv(path)
-   
+    // console.log();
+
+    const bytes = await file.arrayBuffer()
+
+    const file_buffer = Buffer.from(bytes)
+
+    const fileString = file_buffer.toString('utf-8')
+
+
+    const parseSales = csvToJson.indexHeader(14).fieldDelimiter(',').csvStringToJson(fileString)
+
+    
     const filterParseSales = parseSales.filter(e => e.UserID && e.UserName && e.UserID != "Total");
     const results = await prepareSalesData(filterParseSales, date, bindData?.shop_id)
+    // console.log(results);
 
     if(!results.length) {   
         return {staus:"403", message:"no data to insert"}
     }
     const newSales = await supabase.from('sales').insert(results)
-
+    // console.log(newSales);
     return newSales
 
 }

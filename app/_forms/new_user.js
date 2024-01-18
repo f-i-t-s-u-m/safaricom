@@ -19,7 +19,7 @@ import {useFormState} from "react-dom"
 
 export function NewUser({shop_id, user, variant = false, label="Add new user", title="Create new profile", description = "Add new user to your shop"}) {
     // console.log("shop_id", shop_id);
-    const  handleFormWithShopId = createUser.bind(null, {shop_id})
+    const  handleFormWithShopId = createUser.bind(null, {shop_id : shop_id ?? user?.shop_id, id:user?.id})
     const [showDialog, setShowDialog] = useState()
   const [state, formAction] = useFormState(handleFormWithShopId, {...user})
 
@@ -37,8 +37,8 @@ export function NewUser({shop_id, user, variant = false, label="Add new user", t
 
   return (
     <Dialog open={showDialog} onOpenChange={setShowDialog}>
-      <DialogTrigger asChild>
-        <Button >{label}</Button>
+      <DialogTrigger >
+        {label}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -54,41 +54,41 @@ export function NewUser({shop_id, user, variant = false, label="Add new user", t
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input id="name" name="name" className="col-span-3" />
+            <Input id="name" name="name"  defaultValue={user?.name} className="col-span-3" />
           </div>
           <div className="space-y-3">
             <Label htmlFor="phone" className="text-right">
               Phone
             </Label>
-            <Input id="phone" type="number" name="phone" className="col-span-3" />
+            <Input id="phone" type="number" defaultValue={user?.phone} name="phone" className="col-span-3" />
           </div>
 
           <div className="space-y-3">
             <Label htmlFor="userId" className="text-right">
               User Id
             </Label>
-            <Input id="userId" type="text" name="user_id"  className="col-span-3" />
+            <Input id="userId" type="text" name="user_id" defaultValue={user?.user_id}  className="col-span-3" />
           </div>
 
           <div className="space-y-3">
             <Label htmlFor="startDate" className="text-right" >
               Start Date
             </Label>
-            <Input id="startDate" type="date" name="start_date" placeholder="Year-Month-Day"  className="col-span-3" />
+            <Input id="startDate" type="date" name="start_date" defaultValue={user?.start_date} placeholder="Year-Month-Day"  className="col-span-3" />
           </div>
 
           <div className="space-y-3">
             <Label htmlFor="userType" className="text-right">
               Type
             </Label>
-            <Select id="userType" name="user_type" >
+            <Select id="userType" defaultValue={user?.user_type} name="user_type" >
                
                   <SelectTrigger>
                     <SelectValue placeholder="Select a user type" />
                   </SelectTrigger>
                 
-                <SelectContent>
-                  <SelectItem value="dsa">DSA</SelectItem>
+                <SelectContent >
+                  <SelectItem  value="dsa">DSA</SelectItem>
                   <SelectItem value="ba">BA</SelectItem>
                   <SelectItem value="dsp">DSP</SelectItem>
                 </SelectContent>

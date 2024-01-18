@@ -20,7 +20,7 @@ import { upload_csv } from "../_actions/sales-actions"
 export default function CsvUpload({shop_id = "2000"}) {
 
     const [showDialog, setShowDialog] = useState()
-    const [error, setError] = useState(null)
+    const [error, setError] = useState()
     const handleFormWithInit = upload_csv.bind(null, {shop_id})
   const [state, formAction] = useFormState(handleFormWithInit, {})
   const router = useRouter()
@@ -32,7 +32,8 @@ export default function CsvUpload({shop_id = "2000"}) {
 
     else {
       // console.log("error here new shop form");
-      setError({status:state.status, message:state.message ?? "something went wrong"})
+      console.log(" state ", state);
+      setError({status:state?.status, message:state?.error?.message})
     }
   
   }, [state, router])
@@ -67,7 +68,7 @@ export default function CsvUpload({shop_id = "2000"}) {
             <Label htmlFor="name" className="text-right">
               Upload CSV file
             </Label>
-            <Input required id="name" type="file" name="file" className="col-span-3" />
+            <Input required id="name" type="file" accept=".csv" name="file" className="col-span-3" />
           </div>
           
         </div>

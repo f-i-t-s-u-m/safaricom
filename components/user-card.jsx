@@ -18,7 +18,7 @@ export default function UserCard({user}) {
               {user.user_type}
             </p>
             <p className="text-sm text-muted-foreground">
-              {user.phone}
+              {user.user_id}
             </p>
           </div>
           </Link>
