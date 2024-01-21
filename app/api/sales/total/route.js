@@ -9,7 +9,7 @@ export async function GET(request) {
   const from = request.nextUrl.searchParams.get('from')  ?? dayStart.toISOString().slice(0,10)
   const to = request.nextUrl.searchParams.get('to') ?? currentDate.toISOString().slice(0,10)
 
-    console.log("we got ", to, from);
+    // console.log("we got ", to, from);
     //  const {id} = params
      
 
@@ -27,7 +27,7 @@ export async function GET(request) {
       }
       
       if (!sales.length) {
-        console.log('No data found')
+        // console.log('No data found')
         return  NextResponse.json([])
       }
     

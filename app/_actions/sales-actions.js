@@ -183,7 +183,7 @@ export async function upload_csv(bindData, init_data, formData) {
     
     const filterParseSales = parseSales.filter(e => e.UserID && e.UserName && e.UserID != "Total");
     const results = await prepareSalesData(filterParseSales, date, bindData?.shop_id)
-    console.log(results);
+    // console.log(results);
 
     if(!results.length) {   
         return {staus:"403", message:"no data to insert"}

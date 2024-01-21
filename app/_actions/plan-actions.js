@@ -21,7 +21,7 @@ export async function allPlanes() {
         
         return res.json()
     } catch {
-        console.log("error");
+        // console.log("error");
         return []
     }
       
@@ -49,7 +49,7 @@ export async function shopPlan(id) {
         return res.json()
         
     } catch {
-        console.log("error");
+        // console.log("error");
         return []
     }
    
@@ -74,7 +74,7 @@ export async function upsertPlan(getInfo, someData, formData) {
         id, airtime, sim_card, device, date, shop_id
     })
 
-    console.log(upsertRes);
+    // console.log(upsertRes);
 
     if(upsertRes.status == 204) {
         revalidateTag('sales')

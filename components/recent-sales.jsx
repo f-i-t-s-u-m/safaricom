@@ -52,8 +52,13 @@ import RProgressBar from "./raduisProgressBar"
         </div> 
   )
 } else {
-  return (
-    <NewPlan shop_id={id} />
-    )
+
+  if(id) {
+
+    
+    return (
+      <NewPlan shop_id={id} />
+      )
+    }
 }
   }

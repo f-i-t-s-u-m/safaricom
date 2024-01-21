@@ -12,7 +12,7 @@ export async function GET(request, {params}) {
     }
 
     else if (!data.length) {
-        console.log('No data found')
+        // console.log('No data found')
         return  NextResponse.json([])
       }
     

@@ -8,7 +8,7 @@ import RecentSales from "@/components/recent-sales";
 export default async function DashboardPage({params, searchParams}) {
   const {id} = params
   const {from, to} = searchParams
-  console.log("search", searchParams);
+  // console.log("search", searchParams);
   const totalSales = await getTotalSales({from, to}, id)
   
   return (

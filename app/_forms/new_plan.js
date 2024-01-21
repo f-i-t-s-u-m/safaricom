@@ -33,7 +33,7 @@ const router = useRouter()
 
     useEffect(() => {
       if(state?.status == 201) {
-        console.log("state of mind - ", state);
+        // console.log("state of mind - ", state);
         setShowDialog(false)
         // revalidatePath('shops')
         router.refresh()
