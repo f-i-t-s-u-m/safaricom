@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import supabase from "@/lib/supabase";
 
 export async function GET(request) {
-    const {data, error} =  await supabase.from('sale_revenue').select('*, user(*)')
+    const {data, error} =  await supabase.from('sale_revenue').select('*, user(*)').order('date')
 
     if (error) {
         console.log(error)

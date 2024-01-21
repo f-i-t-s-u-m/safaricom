@@ -14,6 +14,7 @@ export async function GET(request, {params}) {
     const {data, error} =  await supabase.from('sale_revenue')
     .select('*, user(*)')
     .eq('user_id', id)
+    .order('date')
     .gte("date", from)
     .lte("date", to)
 

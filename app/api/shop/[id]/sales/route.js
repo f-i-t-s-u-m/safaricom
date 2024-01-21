@@ -14,6 +14,7 @@ export async function GET(request, {params}) {
           .select(`
             *, user(*)
           `)
+          .order('date')
           .eq('shop_id', id)
           .gte("date", from)
           .lte("date", to )
