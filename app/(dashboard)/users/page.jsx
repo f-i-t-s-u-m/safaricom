@@ -12,7 +12,7 @@ export default async function page() {
      <h2 className="text-3xl mb-0 pb-1 font-bold tracking-tight">Users</h2>
      <p className="text-gray-600">Your org. users</p>
     </div>
-      <div className=' gap-5  grid grid-cols-3 w-full '>
+      <div className=' gap-5 flex flex-col  md:grid md:grid-cols-2 lg:grid-cols-3 w-full '>
 
         {shopUsers?.map(user => (
           <UserCard key={user.id} user={user} />

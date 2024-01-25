@@ -14,7 +14,7 @@ export default function Overview({data}) {
     <Card className="col-span-4 ">
 
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle>Overview</CardTitle>
+      <CardTitle className="hidden md:block">Overview</CardTitle>
       <Tabs defaultValue={dataKey} className="space-y-4">
 <TabsList >
 <TabsTrigger value="total" onClick={() => setDataKey('total')}>Total</TabsTrigger>

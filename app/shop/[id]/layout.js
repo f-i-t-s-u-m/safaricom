@@ -25,8 +25,8 @@ export default async function layout({children, params}) {
   return (
     <div>
 
-<div className="flex border-gray-900 shadow mb-5 items-center justify-between space-y-4 px-16 pt-10">
-            <div className="my-4">
+<div className="flex flex-col md:flex-row border-gray-900 shadow mb-5 items-center justify-between space-y-4  md:px-16 pt-10">
+            <div className="mt-4">
               <div className='flex'>
 
                 <div>
@@ -42,7 +42,7 @@ export default async function layout({children, params}) {
               <TabNav active="overview" urlList={urlList} urlPath={3}  />
             </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 pb-5">
               <CalendarDateRangePicker />
             </div>
           </div>

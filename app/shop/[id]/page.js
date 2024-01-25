@@ -39,9 +39,9 @@ export default async function DashboardPage({params, searchParams}) {
   return (
     <>
       
-      <div className="hidden flex-col md:flex px-6">
+      <div className=" flex-col md:flex px-6">
        
-        <div className="flex-1 space-y-4 p-8 pt-6">
+        <div className="flex-1 space-y-4 md:p-8 pt-6">
           
               <DashboardCards totalSales={totalSales} />
               

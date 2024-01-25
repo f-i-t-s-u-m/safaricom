@@ -14,7 +14,7 @@ export default async function page({params}) {
         <h1 className="text-3xl font-bold tracking-tight pb-10">Shop Users</h1>
         <NewUser shop_id={id} />
         </div>
-    <div className=' gap-5  grid grid-cols-3 w-full '>
+        <div className=' gap-5 flex flex-col  md:grid md:grid-cols-2 lg:grid-cols-3 w-full '>
 
         {shopUsers?.map(e => (
             <UserCard key={e} user={e} />

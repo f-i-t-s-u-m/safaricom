@@ -18,7 +18,7 @@ export default async function Sales() {
      <h2 className="text-3xl mb-0 pb-1 font-bold tracking-tight">Sales</h2>
      <p className="text-gray-600">Your sales report</p>
     </div>
-      <div className="hidden h-full flex-1 flex-col  md:flex">
+      <div className=" h-full flex-1 flex-col  md:flex">
         <DataTable data={sales}  />
       </div>
     </>

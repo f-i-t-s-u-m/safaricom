@@ -16,7 +16,7 @@ export default async function DashboardPage() {
       <NewShop />
      
     </div>
-    <div className="grid grid-cols-4 gap-6">
+    <div className=" fle flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
           {shops?.map(e => (
             

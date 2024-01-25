@@ -24,7 +24,7 @@ import {
     const getSales = await shopSale(id, {from, to}, false)
 
     return (
-      <div className="px-16">
+      <div className="px-5 md:px-16">
 <div className="flex justify-between items-center">
 <h1 className="text-3xl font-bold tracking-tight py-10">Sales</h1>
 {/* <NewSales user={} /> */}

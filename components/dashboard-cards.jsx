@@ -9,7 +9,7 @@ export default async function DashboardCards({totalSales}) {
 
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 my-10">
+    <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 my-10">
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
