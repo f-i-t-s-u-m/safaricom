@@ -2,6 +2,7 @@
 
 import supabase from "@/lib/supabase"
 import { revalidatePath, revalidateTag } from "next/cache"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 export async function listShop() {
@@ -68,6 +69,7 @@ export async function listShopUsers(id) {
 export async function createShop(currentState, someData, formData) {
 
   
+    if(cookies().get('auth') != "area_manager") {return }
 
      const id  = currentState.id ?? undefined
     const name = formData.get('name')

@@ -7,6 +7,7 @@ import { writeFile } from "fs/promises"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { allProducts } from "./product-actions"
 import { listShopUsers } from "./shop-actions"
+import { cookies } from "next/headers"
 // import formidable from "formidable"
 
 
@@ -72,7 +73,8 @@ export async function shopSale(id, filterBy = {}, stat = false) {
 export async function createSales(getInfo, someData, formData) {
 
 
-  
+    if(cookies().get('auth') != "area_manager") {return }
+    
     const sales = Object.keys(Object.fromEntries(formData))
     ?.map((item) => {
         return {
@@ -103,6 +105,7 @@ export async function createSales(getInfo, someData, formData) {
 }
 
 export async function updateSales(getInfo, someData, formData) {
+    if(cookies().get('auth') != "area_manager") {return }
 
     // console.log("getInfo - ", getInfo, "someData - ", someData, "formdate - ",  formData);
    
@@ -162,7 +165,7 @@ export async function getTotalSales(filterBy) {
 
 export async function upload_csv(bindData, init_data, formData) {
     // console.log(formData);
-    const path = "public/upload/safari.csv"
+    if(cookies().get('auth') != "area_manager") {return }
 
     
     

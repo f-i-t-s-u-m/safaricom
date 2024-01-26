@@ -2,6 +2,7 @@
 
 import supabase from "@/lib/supabase"
 import { revalidatePath, revalidateTag } from "next/cache"
+import { cookies } from "next/headers"
 
 
 export async function getUser(id) {
@@ -70,12 +71,8 @@ export async function userSales(id, filterBy = {}, stat = false,) {
 
 export async function createUser(currentState, bindData, formData) {
 
+    if(cookies().get('auth') != "area_manager") {return }
 
-    
-    // console.log(formData);
-    // console.log(currentState);
-    // console.log(bindData);
-    // return 1
     const rawFormData = {
         id:formData?.get('id') ?? currentState?.id,
         name:formData.get('name'),

@@ -7,8 +7,8 @@ import { ArrowRightIcon, Crosshair2Icon } from '@radix-ui/react-icons'
 export default function CardWithImg({name, location, id}) {
   return (
     
-<Link href={`/shop/${id}`}>
-<div className="max-w-sm bg-white border shadow-sm  border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700">
+<Link href={`/shop/${id}`} className='relative'>
+<div className="max-w-sm bg-white border shadow-sm   border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700">
         <div className='relative w-full h-44'>
         <Image className="rounded-t-lg" fill src="/bg/images.jpg" alt="" />
         </div>

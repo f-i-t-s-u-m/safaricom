@@ -3,6 +3,7 @@
 import { thisMonthSales } from "@/lib/sales-lib"
 import supabase from "@/lib/supabase"
 import { revalidatePath, revalidateTag } from "next/cache"
+import { cookies } from "next/headers"
 
 
 export async function allPlanes() {
@@ -62,6 +63,8 @@ export async function shopPlan(id) {
 export async function upsertPlan(getInfo, someData, formData) {
 
     // console.log("getInfo - ", getInfo, "someData - ", someData, "formdate - ",  formData);
+
+    if(cookies().get('auth') != "area_manager") {return }
    
     const airtime = formData.get('airtime');
     const sim_card = formData.get('sim_card');
@@ -90,7 +93,7 @@ export async function upsertPlan(getInfo, someData, formData) {
 export async function deletePlan(data) {
 
    
-
+    if(cookies().get('auth') != "area_manager") {return }
     const deleteRes = await supabase.from('plan').delete().eq('id', data.id)
 
     // console.log(deleteRes);

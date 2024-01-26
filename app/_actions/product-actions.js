@@ -2,6 +2,7 @@
 
 import supabase from "@/lib/supabase"
 import { revalidatePath, revalidateTag } from "next/cache"
+import { cookies } from "next/headers"
 
 
 export async function allProducts() {
@@ -29,7 +30,8 @@ export async function allProducts() {
 export async function createProduct(state, formData) {
 
 
-   
+    if(cookies().get('auth') != "area_manager") {return }
+
     const rawFormData = {
         id:formData?.get('id') ?? undefined,
         name:formData.get('name'),

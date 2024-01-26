@@ -30,7 +30,7 @@ export default function CalendarDateRangePicker({
   const pathname = usePathname()
 
 
-  console.log(pathname);
+  // console.log(pathname);
 
  
 

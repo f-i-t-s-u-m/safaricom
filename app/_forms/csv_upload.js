@@ -32,7 +32,7 @@ export default function CsvUpload({shop_id = "2000"}) {
 
     else {
       // console.log("error here new shop form");
-      console.log(" state ", state);
+      // console.log(" state ", state);
       setError({status:state?.status, message:state?.error?.message})
     }
   

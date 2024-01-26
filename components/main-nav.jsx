@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
+import UserDropdown from "./user-action"
 
 export default function MainNav({
   className,
@@ -8,9 +9,11 @@ export default function MainNav({
 }) {
   return (
     <nav
-      className={cn("flex items-center space-x-4 lg:space-x-6", className)}
+      className={cn("flex items-center justify-between w-full ", className)}
       {...props}
     >
+      <div className="space-x-4 lg:space-x-6">
+
       <Link
         href="/"
         className="text-sm font-medium transition-colors hover:text-primary"
@@ -18,18 +21,21 @@ export default function MainNav({
         Home
       </Link>
       <Link
-        href="/plans"
+        href="/plan"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Plans
       </Link>
       <Link
-        href="/goals"
+        href="/goal"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
+        >
         Goals
       </Link>
       
+        </div>
+
+        <UserDropdown />
     </nav>
   )
 }
