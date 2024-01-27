@@ -5,9 +5,21 @@ import MainNav from '@/components/main-nav'
 
 const inter = Inter({ subsets: ['latin'] })
 
+
 export const metadata = {
+  metadataBase: new URL('https://safaricom.vercel.app'),
   title: 'Bluespark sales report ',
   description: 'Your trusted partner for technology solutions ',
+  siteName: 'Bluespark sales report webapp',
+  generator:"",
+  locale: 'en_US',
+  type: 'website',
+  authors: [{name: 'fitsum belay', url: 'https://www.linkedin.com/in/f-i-t-s-u-m'}, {name: 'chernet'}],
+  creator: 'Fitsum Belay',
+  publisher: 'Fitsum Belay',
+  openGraph: {
+    images: '/logo.svg',
+  },
 }
 
 export default function RootLayout({ children }) {
