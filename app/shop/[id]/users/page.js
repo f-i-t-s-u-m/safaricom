@@ -1,12 +1,14 @@
 import { listShopUsers } from '@/app/_actions/shop-actions'
 import { NewUser } from '@/app/_forms/new_user'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import UserCard from '@/components/user-card'
-import Link from 'next/link'
+import checkAuth from '@/lib/checkAuth'
 
 export default async function page({params}) {
+  const {isAM} = await checkAuth()
+
     const {id} = params
   const shopUsers = await listShopUsers(id)
+
   return (
     <div className='py-6 px-10'>
         <div className='flex justify-between'>
@@ -17,7 +19,7 @@ export default async function page({params}) {
         <div className=' gap-5 flex flex-col  md:grid md:grid-cols-2 lg:grid-cols-3 w-full '>
 
         {shopUsers?.map(e => (
-            <UserCard key={e} user={e} />
+            <UserCard key={e} user={e} isAM={isAM} />
             ))}
             </div>
     </div>

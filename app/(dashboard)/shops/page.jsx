@@ -2,9 +2,11 @@
 import CardWithImg from "@/components/card-with-img"
 import { listShop } from "@/app/_actions/shop-actions"
 import { NewShop } from "@/app/_forms/new_shop"
+import  checkAuth from "@/lib/checkAuth"
 
 export default async function DashboardPage() {
   const shops = await listShop()
+  const {isAM} = await checkAuth()
   return (
     <>
     <div className="flex justify-between">
@@ -13,8 +15,9 @@ export default async function DashboardPage() {
      <p className="text-gray-600">List of active shops</p>
     </div>
 
-      <NewShop />
-     
+    {isAM && 
+      <NewShop /> 
+    }
     </div>
     <div className=" fle flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 

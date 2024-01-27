@@ -13,11 +13,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import checkAuth from "@/lib/checkAuth"
 import { DotsVerticalIcon, Pencil1Icon, TrashIcon } from "@radix-ui/react-icons"
+
 
 export default async function page() {
   
     const products = await allProducts()
+    const {isAM} = await checkAuth()
+
 
   return (
   <>
@@ -27,8 +31,9 @@ export default async function page() {
      <h2 className="text-3xl mb-0 pb-1 font-bold tracking-tight">Products</h2>
      <p className="text-gray-600">All of your products</p>
     </div>
-
+  {isAM && 
     <NewProduct />
+  }
    </div>
     <Table>
     <TableCaption>A list of products.</TableCaption>
@@ -50,7 +55,7 @@ export default async function page() {
           <TableCell className="capitalize">{item.product_type.split("_").join(" ")}</TableCell>
           <TableCell className="text-right">
           <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger disabled={!isAM} asChild>
             <Button variant="ghost" size="icon">
               {/* <MoreVertical className="h-4 w-4" /> */}
               <DotsVerticalIcon />

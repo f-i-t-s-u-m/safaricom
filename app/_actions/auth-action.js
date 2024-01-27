@@ -51,5 +51,5 @@ export async function logout() {
     cookies().delete("auth")
     cookies().delete("session")
 
-    redirect('login')
+    redirect('/login')
 }

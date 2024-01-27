@@ -1,5 +1,4 @@
 'use client'
-import { DropdownMenuArrow } from '@radix-ui/react-dropdown-menu'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { logout } from '@/app/_actions/auth-action'
@@ -7,6 +6,9 @@ import { ExitIcon, FaceIcon } from '@radix-ui/react-icons'
 
 
 export default function UserDropdown({data}) {
+
+
+
   return (
     <DropdownMenu className=" my-auto">
     <DropdownMenuTrigger asChild className='my-auto  border'>

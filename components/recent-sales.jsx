@@ -1,9 +1,4 @@
-import { listShopUsers } from "@/app/_actions/shop-actions"
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-  } from "@/components/ui/avatar"
+
 import { LProgressBar } from "./progressBar"
 import { allPlanes, shopPlan } from "@/app/_actions/plan-actions"
 import { NewPlan } from "@/app/_forms/new_plan"
@@ -12,9 +7,12 @@ import { getTotalSales, shopSale } from "@/app/_actions/sales-actions"
 import { calculateTotals } from "@/lib/sales-lib"
 import { generateAchievement } from "@/lib/plans-lib"
 import RProgressBar from "./raduisProgressBar"
+import checkAuth from "@/lib/checkAuth"
   
   export default async function RecentSales({id = null}) {
 
+    const {isAM} = await checkAuth()
+   
     const [start, end] = getFirstLastDaysOfMon()
     let plan
     let monthlySales
@@ -53,9 +51,8 @@ import RProgressBar from "./raduisProgressBar"
   )
 } else {
 
-  if(id) {
+  if(isAM && id ) {
 
-    
     return (
       <NewPlan shop_id={id} />
       )

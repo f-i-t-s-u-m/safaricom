@@ -1,11 +1,12 @@
 import { allUsers } from '@/app/_actions/user-action'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import UserCard from '@/components/user-card'
-import Link from 'next/link'
+import checkAuth from '@/lib/checkAuth'
 
 export default async function page() {
 
+  const {isAM} = await checkAuth()
   const shopUsers = await allUsers()
+
   return (
     <div className=' mb-5'>
       <div className='mb-10'>
@@ -15,7 +16,7 @@ export default async function page() {
       <div className=' gap-5 flex flex-col  md:grid md:grid-cols-2 lg:grid-cols-3 w-full '>
 
         {shopUsers?.map(user => (
-          <UserCard key={user.id} user={user} />
+          <UserCard key={user.id} user={user} isAM={isAM} />
         ))}
       </div>
     </div>

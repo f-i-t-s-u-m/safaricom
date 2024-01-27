@@ -3,7 +3,7 @@ import React from 'react'
 import { Avatar, AvatarFallback } from './ui/avatar'
 import { NewSales } from '@/app/_forms/new_sales'
 
-export default function UserCard({user}) {
+export default function UserCard({user, isAM = false}) {
   return (
     <div >
           
@@ -22,7 +22,9 @@ export default function UserCard({user}) {
             </p>
           </div>
           </Link>
-          <div className="ml-auto font-medium"><NewSales user={user} /></div>
+          <div className="ml-auto font-medium">
+            {isAM && <NewSales user={user} /> }
+            </div>
         </div>
             </div>
   )

@@ -2,11 +2,15 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import UserDropdown from "./user-action"
+import checkAuth from "@/lib/checkAuth"
 
-export default function MainNav({
+export default async function MainNav({
   className,
   ...props
 }) {
+
+  const {account} = await checkAuth()
+
   return (
     <nav
       className={cn("flex items-center justify-between w-full ", className)}
@@ -34,8 +38,9 @@ export default function MainNav({
       </Link>
       
         </div>
-
+        {account &&
         <UserDropdown />
+      }
     </nav>
   )
 }

@@ -8,6 +8,6 @@ export async function GET(request, {params}) {
         console.log("error");
         return  NextResponse.json([])
     }
-    console.log("data", data, "error");
+    // console.log("data", data, "error");
     return  NextResponse.json(data, {status:200})
 }
