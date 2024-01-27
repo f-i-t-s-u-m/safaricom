@@ -31,7 +31,8 @@ export default function layout({dashCards, children}) {
           </div>
 
             </div>
-            <div className="flex items-center space-x-2 pt-10 md:pt-0">
+            <div className="flex flex-col items-center space-x-2 pt-10 md:pt-0">
+               <span className=' font-bold text-gray-700 pb-2'> Report Date Range</span> 
                <CalendarDateRangePicker />
             </div>
           </div>

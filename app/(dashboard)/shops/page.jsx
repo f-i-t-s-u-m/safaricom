@@ -19,9 +19,8 @@ export default async function DashboardPage() {
       <NewShop /> 
     }
     </div>
-    <div className=" fle flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-          {shops?.map(e => (
+    <div className=" mx-auto max-w-sm md:max-w-full pb-10  md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {shops?.map(e => (
 
             
             <CardWithImg key={e.id} {...e} />

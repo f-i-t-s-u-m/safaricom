@@ -43,7 +43,8 @@ export default async function layout({children, params}) {
               <TabNav active="overview" urlList={urlList} urlPath={3}  />
             </div>
             </div>
-            <div className="flex items-center space-x-2 pb-5">
+            <div className="flex flex-col items-center space-x-2 pb-5">
+              <span className=' font-bold text-gray-700 pb-2'> Report Date Range</span> 
               <CalendarDateRangePicker />
             </div>
           </div>
